@@ -1,11 +1,12 @@
+import java.util.Scanner;
+
 public abstract class Location {
     private Player player;
     private String name;
-
-    public Location() {
-    }
+    public static Scanner input= new Scanner(System.in);
 
     public Location(Player player,String name) {
+        this.name=name;
         this.player = player;
     }
    public abstract boolean onLocation();

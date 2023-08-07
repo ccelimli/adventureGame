@@ -14,10 +14,20 @@ public class Player {
 
     public Player(String name) {
         this.name = name;
+        this.inventory = new Inventory();
     }
 
     public Inventory getInventory() {
         return inventory;
+    }
+
+    public void printInfo() {
+        System.out.println("Silah: " + this.getInventory().getWeapon().getWeaponName() +
+                           ", Zırh: " + this.getInventory().getArmor().getItemName() +
+                           ", Bloklama: " + this.getInventory().getArmor().getBlock() +
+                           ", Hasar: " + this.getDamage() +
+                           ", Sağlık: " + this.getHealth() +
+                           ", Para: " + this.getMoney());
     }
 
     public void setInventory(Inventory inventory) {
@@ -25,7 +35,7 @@ public class Player {
     }
 
     public Integer getDamage() {
-        return damage;
+        return damage+this.getInventory().getWeapon().getDamage();
     }
 
     public void setDamage(Integer damage) {
@@ -64,6 +74,14 @@ public class Player {
         this.charName = charName;
     }
 
+    public Scanner getInput() {
+        return input;
+    }
+
+    public void setInput(Scanner input) {
+        this.input = input;
+    }
+
     public void selectChar() {
         GameChar[] gameChars = {new Samurai(), new Knight(), new Archer()};
         System.out.println("Karakterler");
@@ -78,40 +96,20 @@ public class Player {
 
         System.out.println("----------------------------------------------------------------------------------");
         System.out.println("Lütfen bir karakter giriniz: ");
-        Integer selectChar = input.nextInt();
+        int selectChar = input.nextInt();
         switch (selectChar) {
-            case 1:
-                initPlayer(new Samurai());
-                break;
-            case 2:
-                initPlayer(new Archer());
-                break;
-            case 3:
-                initPlayer(new Knight());
-                break;
-            default:
-                initPlayer(new Samurai());
+            case 1 -> initPlayer(new Samurai());
+            case 2 -> initPlayer(new Archer());
+            case 3 -> initPlayer(new Knight());
+            default -> initPlayer(new Samurai());
         }
 
-        System.out.println("Karakter: " + this.getCharName() +
-                           ", Hasar: " + this.getDamage() +
-                           ", Sağlık: " + this.getHealth() +
-                           ", Para: " + this.getMoney());
+//        System.out.println("Karakter: " + this.getCharName() +
+//                           ", Hasar: " + this.getDamage() +
+//                           ", Sağlık: " + this.getHealth() +
+//                           ", Para: " + this.getMoney());
     }
 
-    public void selectLoc(){
-        Location location=null;
-        System.out.println("Bölgeler");
-        System.out.println("1 - Güvenli Ev");
-        System.out.println("2 - Mağaza");
-        System.out.println("Lütfen Bölge Seçiniz: ");
-        Integer selectLoc=input.nextInt();
-        switch (selectLoc){
-            case 1:
-                location= new SafeHouse(this);
-                break;
-        }
-    }
 
     public void initPlayer(GameChar gameChar) {
         this.setDamage(gameChar.getDamage());

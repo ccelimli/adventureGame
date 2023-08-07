@@ -1,78 +1,25 @@
 public class Inventory {
-    private Boolean water;
-    private Boolean food;
-    private Boolean firewoord;
-    private String weaponGame;
-    private String armorName;
-    private Integer weaponDamage;
-    private Integer armorDefence;
+    private Weapon weapon;
+    private Armor armor;
 
-    public Inventory() {
+    public Inventory(){
+        this.weapon = new Weapon("Yumruk", -1,0,0);
+        this.armor=new Armor(-1,"Yok",0,0);
     }
 
-    public Inventory(Boolean water, Boolean food, Boolean firewoord, String weaponGame, String armorName, Integer weaponDamage, Integer armorDefence) {
-        this.water = water;
-        this.food = food;
-        this.firewoord = firewoord;
-        this.weaponGame = weaponGame;
-        this.armorName = armorName;
-        this.weaponDamage = weaponDamage;
-        this.armorDefence = armorDefence;
+    public Weapon getWeapon() {
+        return weapon;
     }
 
-    public Boolean getWater() {
-        return water;
+    public void setWeapon(Weapon weapon) {
+        this.weapon = weapon;
     }
 
-    public void setWater(Boolean water) {
-        this.water = water;
+    public Armor getArmor() {
+        return armor;
     }
 
-    public Boolean getFood() {
-        return food;
-    }
-
-    public void setFood(Boolean food) {
-        this.food = food;
-    }
-
-    public Boolean getFirewoord() {
-        return firewoord;
-    }
-
-    public void setFirewoord(Boolean firewoord) {
-        this.firewoord = firewoord;
-    }
-
-    public String getWeaponGame() {
-        return weaponGame;
-    }
-
-    public void setWeaponGame(String weaponGame) {
-        this.weaponGame = weaponGame;
-    }
-
-    public String getArmorName() {
-        return armorName;
-    }
-
-    public void setArmorName(String armorName) {
-        this.armorName = armorName;
-    }
-
-    public Integer getWeaponDamage() {
-        return weaponDamage;
-    }
-
-    public void setWeaponDamage(Integer weaponDamage) {
-        this.weaponDamage = weaponDamage;
-    }
-
-    public Integer getArmorDefence() {
-        return armorDefence;
-    }
-
-    public void setArmorDefence(Integer armorDefence) {
-        this.armorDefence = armorDefence;
+    public void setArmor(Armor armor) {
+        this.armor = armor;
     }
 }
