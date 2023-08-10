@@ -5,6 +5,7 @@ public class Player {
     private Integer health;
     private Integer money;
     private String name;
+    private int originalHealtPlayer;
     private String charName;
     private Inventory inventory;
     private Scanner input = new Scanner(System.in);
@@ -25,7 +26,7 @@ public class Player {
         System.out.println("Silah: " + this.getInventory().getWeapon().getWeaponName() +
                            ", Zırh: " + this.getInventory().getArmor().getItemName() +
                            ", Bloklama: " + this.getInventory().getArmor().getBlock() +
-                           ", Hasar: " + this.getDamage() +
+                           ", Hasar: " + this.getTotalDamage() +
                            ", Sağlık: " + this.getHealth() +
                            ", Para: " + this.getMoney());
     }
@@ -34,8 +35,12 @@ public class Player {
         this.inventory = inventory;
     }
 
-    public Integer getDamage() {
+    public Integer getTotalDamage(){
         return damage+this.getInventory().getWeapon().getDamage();
+    }
+
+    public Integer getDamage() {
+        return this.damage;
     }
 
     public void setDamage(Integer damage) {
@@ -82,6 +87,18 @@ public class Player {
         this.input = input;
     }
 
+    public Weapon getWeapon(){
+        return this.getInventory().getWeapon();
+    }
+
+    public int getOriginalHealtPlayer() {
+        return originalHealtPlayer;
+    }
+
+    public void setOriginalHealtPlayer(int originalHealtPlayer) {
+        this.originalHealtPlayer = originalHealtPlayer;
+    }
+
     public void selectChar() {
         GameChar[] gameChars = {new Samurai(), new Knight(), new Archer()};
         System.out.println("Karakterler");
@@ -103,17 +120,13 @@ public class Player {
             case 3 -> initPlayer(new Knight());
             default -> initPlayer(new Samurai());
         }
-
-//        System.out.println("Karakter: " + this.getCharName() +
-//                           ", Hasar: " + this.getDamage() +
-//                           ", Sağlık: " + this.getHealth() +
-//                           ", Para: " + this.getMoney());
     }
 
 
     public void initPlayer(GameChar gameChar) {
         this.setDamage(gameChar.getDamage());
         this.setHealth(gameChar.getHealth());
+        this.setOriginalHealtPlayer(gameChar.getHealth());
         this.setMoney(gameChar.getMoney());
         this.setCharName(gameChar.getName());
     }

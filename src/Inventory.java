@@ -1,6 +1,7 @@
 public class Inventory {
     private Weapon weapon;
     private Armor armor;
+    private String[] award = new String[3];
 
     public Inventory(){
         this.weapon = new Weapon("Yumruk", -1,0,0);
@@ -21,5 +22,13 @@ public class Inventory {
 
     public void setArmor(Armor armor) {
         this.armor = armor;
+    }
+
+    public String[] getAward() {
+        return award;
+    }
+
+    public void setAward(String[] award) {
+        this.award = award;
     }
 }

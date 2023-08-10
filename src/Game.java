@@ -18,14 +18,20 @@ public class Game {
             player.printInfo();
             System.out.println("Bölgeler");
             System.out.println("1 - Güvenli Ev --> Düşman Yok");
-            System.out.println("2 - Mağaza --> Silah veya Zırh alabilirsiniz.");
+            System.out.println("2 - Eşya Dükkanı --> Silah veya Zırh alabilirsiniz.");
+            System.out.println("3 - Mağara --> (Ödül <Yemek>) Mağaraya Gir. Dikkatli ol! Zombi Çıkabilir.");
+            System.out.println("4 - Orman -->(Ödül <Odun>) Ormana Gir. Dikkatli ol! Vampir Çıkabilir.");
+            System.out.println("5 - Nehir -->(Ödül <Su>) Nehre Gir. Dikkatli ol! Ayı Çıkabilir.");
             System.out.println("0 - Çıkış Yap --> Oyunu Sonlandır!");
             System.out.println("Lütfen Bölge Seçiniz: ");
             int selectLoc = input.nextInt();
             location = switch (selectLoc) {
                 case 0 ->location=null;
-                case 1 -> new SafeHouse(player);
-                case 2 -> new ToolStore(player);
+                case 1 -> location=new SafeHouse(player);
+                case 2 -> location=new ToolStore(player);
+                case 3 ->location=new Cave(player);
+                case 4 ->location=new Forest(player);
+                case 5 ->location=new River(player);
                 default -> new SafeHouse(player);
             };
             if (location==null){
