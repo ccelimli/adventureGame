@@ -27,7 +27,7 @@ public class BattleLoc extends Location {
                 addAwardInventory();
                 return true;
             }
-            if (this.getPlayer().getHealth() <=0) {
+            if (this.getPlayer().getHealth() <= 0) {
                 System.out.println("Öldünüz!");
                 return false;
             }
@@ -119,10 +119,15 @@ public class BattleLoc extends Location {
                 }
             }
             if (this.getObstacle().getHealt() < this.getPlayer().getHealth()) {
-                System.out.println("Düşmanı Yendin");
-                System.out.println(this.getObstacle().getAward() + " para kazandın");
-                this.getPlayer().setMoney(this.getPlayer().getMoney() + this.getObstacle().getAward());
-                System.out.println("Güncel Bakiye: " + this.getPlayer().getMoney());
+                if (this.getName().equals("Maden")){
+                    System.out.println(i + ". Düşmanı yendiniz !");
+                    randomAward();
+                } else {
+                    System.out.println("Düşmanı Yendin");
+                    System.out.println(this.getObstacle().getAward() + " para kazandın");
+                    this.getPlayer().setMoney(this.getPlayer().getMoney() + this.getObstacle().getAward());
+                    System.out.println("Güncel Bakiye: " + this.getPlayer().getMoney());
+                }
             } else {
                 return false;
             }
@@ -162,6 +167,59 @@ public class BattleLoc extends Location {
     public int randomHit() {
         Random random = new Random();
         return random.nextInt(2);
+    }
+
+    public void randomAward() {
+        Random random = new Random();
+        int awardNumber = random.nextInt(101);
+        if ((1 <= awardNumber) || (awardNumber <= 15)) {
+            this.randomWeapon();
+        }
+        else if ((16 <= awardNumber) || (awardNumber <= 30)) {
+            this.randomArmor();
+        }
+        else if ((31 <= awardNumber) || (awardNumber <= 55)) {
+            this.randomMoney();
+        }
+        else if ((56 <= awardNumber) || (awardNumber <= 100)) {
+            System.out.println("Herhangi bir ödül kazanamadınız!");
+        }
+    }
+
+    public void randomWeapon() {
+        Random random = new Random();
+        int moneyRandom = random.nextInt(101);
+        if ((1 <= moneyRandom) || (moneyRandom <= 20)) {
+            this.getPlayer().getInventory().setWeapon(Weapon.getWeaponObjectById(3));
+        } else if ((21 <= moneyRandom) || (moneyRandom <= 50)) {
+            this.getPlayer().getInventory().setWeapon(Weapon.getWeaponObjectById(2));
+        } else if ((51 <= moneyRandom) || (moneyRandom <= 100)) {
+            this.getPlayer().getInventory().setWeapon(Weapon.getWeaponObjectById(1));
+        }
+    }
+
+    public void randomArmor() {
+        Random random = new Random();
+        int armorRandom = random.nextInt(101);
+        if ((1 <= armorRandom) || (armorRandom <= 20)) {
+            this.getPlayer().getInventory().setArmor(Armor.getArmorObjectById(3));
+        } else if ((21 <= armorRandom) || (armorRandom <= 50)) {
+            this.getPlayer().getInventory().setArmor(Armor.getArmorObjectById(2));
+        } else if ((51 <= armorRandom) || (armorRandom <= 100)) {
+            this.getPlayer().getInventory().setArmor(Armor.getArmorObjectById(1));
+        }
+    }
+
+    public void randomMoney() {
+        Random random = new Random();
+        int moneyRandom = random.nextInt(101);
+        if ((1 <= moneyRandom) || (moneyRandom <= 20)) {
+            this.getPlayer().setMoney(this.getPlayer().getMoney() + 10);
+        } else if ((21 <= moneyRandom) || (moneyRandom <= 50)) {
+            this.getPlayer().setMoney(this.getPlayer().getMoney() + 5);
+        } else if ((51 <= moneyRandom) || (moneyRandom <= 100)) {
+            this.getPlayer().setMoney(this.getPlayer().getMoney() + 1);
+        }
     }
 
     public Obstacle getObstacle() {
