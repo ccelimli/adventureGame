@@ -22,6 +22,7 @@ public class Game {
             System.out.println("3 - Mağara --> (Ödül <Yemek>) Mağaraya Gir. Dikkatli ol! Zombi Çıkabilir.");
             System.out.println("4 - Orman -->(Ödül <Odun>) Ormana Gir. Dikkatli ol! Vampir Çıkabilir.");
             System.out.println("5 - Nehir -->(Ödül <Su>) Nehre Gir. Dikkatli ol! Ayı Çıkabilir.");
+            System.out.println("6 - Maden -->(Ödül <Para, Zırh yada Silah>) Madene Gir. Dikkatli ol! Yılan Çıkabilir.");
             System.out.println("0 - Çıkış Yap --> Oyunu Sonlandır!");
             System.out.println("Lütfen Bölge Seçiniz: ");
             int selectLoc = input.nextInt();
@@ -32,6 +33,7 @@ public class Game {
                 case 3 ->location=new Cave(player);
                 case 4 ->location=new Forest(player);
                 case 5 ->location=new River(player);
+                case 6 ->location=new Coal(player);
                 default -> new SafeHouse(player);
             };
             if (location==null){
